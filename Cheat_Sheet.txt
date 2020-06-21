@@ -1,0 +1,21 @@
+# Build Docker Image
+docker build -t [image-name] .
+# For example:
+docker build -t drehnstrom/jenkins-gcp:v0.2 .
+
+
+# To run the container in Cloud Shell
+# You can use Web Preview on port 8080
+docker run -p 8080:8080 -p 50000:50000 [image-name]
+# For example: 
+docker run -p 8080:8080 -p 50000:50000 drehnstrom/jenkins-gcp:v0.2
+
+
+# To Run the Container in a GCE VM
+# 1. Create a VM with a Container Optimized OS (Has Docker installed already)
+# 2. Service the Service Account to allow full access to all Cloud APIs
+# 3. Check box to allow HTTP
+
+docker run -d -p 80:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home [image-name]
+For example:
+docker run -d -p 80:8080 -p 50000:50000 -v jenkins_home:/var/jenkins_home drehnstrom/jenkins-gcp:v0.2
